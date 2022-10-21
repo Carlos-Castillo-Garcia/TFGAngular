@@ -1,4 +1,4 @@
-<div class="modal ventana" id="clienteRegistro" data-backdrop="static"  tabindex="1" rol="dialog"
+<div class="modal ventana" id="clienteRegistro" data-backdrop="static" tabindex="1" rol="dialog"
   aria-labelledby="clienteRegistro" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -17,7 +17,7 @@
                 debe tener más de 3 caracteres
               </p>
               <p class="error" *ngIf="checkError('nombre', 'maxlength')">
-                 debe tener menos de 45 caracteres
+                debe tener menos de 45 caracteres
               </p>
             </div>
             <div class="form-group campo">
@@ -27,10 +27,10 @@
                 requerido
               </p>
               <p class="error" *ngIf="checkError('apellidos', 'minlength')">
-               más de 3 caracteres
+                más de 3 caracteres
               </p>
               <p class="error" *ngIf="checkError('apellidos', 'maxlength')">
-                 menos de 60 caracteres
+                menos de 60 caracteres
               </p>
             </div>
             <div class="form-group campo">
@@ -39,7 +39,7 @@
               <p class="error" *ngIf="checkError('nie', 'required')">
                 requerido
               </p>
-              <p class="error" *ngIf="checkError('nie', 'dnivalidator')">
+              <p class="error" *ngIf="checkError('nie', 'dniValidators')">
                 El campo Nif no es valido
               </p>
             </div>
@@ -89,7 +89,7 @@
                 requerido
               </p>
               <p class="error" *ngIf="checkError('codigoPostal', 'minlength')">
-               debe tener 5 caracteres
+                debe tener 5 caracteres
               </p>
               <p class="error" *ngIf="checkError('codigoPostal', 'maxlength')">
                 debe tener 5 caracteres
@@ -103,7 +103,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" data-backdrop="false">Close</button>
-          <button [hidden]="registroForm.errors || registroForm.invalid" data-dismiss="modal" (click)="enviar()">Save changes</button>
+          <button [hidden]="registroForm.errors || registroForm.invalid" data-dismiss="modal" (click)="enviar()">Save
+            changes</button>
         </div>
       </form>
     </div>

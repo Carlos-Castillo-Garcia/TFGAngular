@@ -13,6 +13,7 @@ const targetPath = isProduction
 const environmentFileContent = `
 export const environment = {
    production: ${isProduction},
+   APIPATH_GENERAL: "${process.env.APIPATH_GENERAL}",
    APIPATH_INMUEBLE:"${process.env.APIPATH_INMUEBLE}",
    APIPATH_INMUEBLEDETALLE:"${process.env.APIPATH_INMUEBLEDETALLE}",
    APIPATH_CLIENTE:"${process.env.APIPATH_CLIENTE}",

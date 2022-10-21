@@ -1,6 +1,7 @@
 
 export const environment = {
    production: false,
+   APIPATH_GENERAL: "http://localhost:8081/api/v1/",
    APIPATH_INMUEBLE: "inmueble/",
    APIPATH_INMUEBLEDETALLE: "inmueble/detalle/",
    APIPATH_CLIENTE: "cliente/",

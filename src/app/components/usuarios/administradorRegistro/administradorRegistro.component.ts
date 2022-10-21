@@ -90,23 +90,147 @@ export class AdministradorRegistroComponent implements OnInit {
     }
   }
   dniValidators(pControl: FormControl) {
-    const value = pControl.value;
-    const grupoLetras = 'TRWAGMYFPDXBNJZSQVHLCKET';
+    // Ensure upcase and remove whitespace
+    let str = pControl.value;
+    str = str.toUpperCase().replace(/\s/, '');
+    let valid = false;
+    let type = '';
 
-    if (/^\d{8}[a-zA-Z]$/.test(value)) {
-      const numero = value.substring(0, value.length - 1);
-      const letra = value.substring(value.length - 1, value.length);
-      const resto = numero % 23;
-      const letraSeleccionada = grupoLetras.substring(resto, resto + 1);
-
-      if (letraSeleccionada != letra.toUpperCase()) {
-        return { dnivalidator: true };
-      } else {
-        return null;
+    var spainIdType = function (str: string) {
+      const DNI_REGEX = /^(\d{8})([A-Z])$/;
+      const CIF_REGEX = /^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/;
+      const NIE_REGEX = /^[XYZ]\d{7,8}[A-Z]$/;
+      if (str.match(DNI_REGEX)) {
+        return 'dni';
       }
-    } else {
-      return { dnivalidator: true };
+      if (str.match(CIF_REGEX)) {
+        return 'cif';
+      }
+      if (str.match(NIE_REGEX)) {
+        return 'nie';
+      }
+      return 'null';
     }
+
+    var validDNI = function (dni: any) {
+      const value = pControl.value;
+      const grupoLetras = 'TRWAGMYFPDXBNJZSQVHLCKET';
+
+      if (/^\d{8}[a-zA-Z]$/.test(value)) {
+        const numero = value.substring(0, value.length - 1);
+        const letra = value.substring(value.length - 1, value.length);
+        const resto = numero % 23;
+        const letraSeleccionada = grupoLetras.substring(resto, resto + 1);
+
+        if (letraSeleccionada != letra.toUpperCase()) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    }
+
+    var validNIE = function (dni: any) {
+      let numero, temp, letra;
+      const expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
+
+      dni = dni.toUpperCase();
+
+      if (expresion_regular_dni.test(dni) === true) {
+        numero = dni.substr(0, dni.length - 1);
+        numero = numero.replace('X', 0);
+        numero = numero.replace('Y', 1);
+        numero = numero.replace('Z', 2);
+        temp = dni.substr(dni.length - 1, 1);
+        numero = numero % 23;
+        letra = 'TRWAGMYFPDXBNJZSQVHLCKET';
+        letra = letra.substring(numero, numero + 1);
+        if (letra != temp) {
+          //alert('Dni erroneo, la letra del NIF no se corresponde');
+          return false;
+        } else {
+          //alert('Dni correcto');
+          return true;
+        }
+      } else {
+        //alert('Dni erroneo, formato no válido');
+        return false;
+      }
+
+    }
+
+    var validCIF = function (cif: any) {
+      const CIF_REGEX = /^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/;
+      if (!cif || cif.length !== 9) {
+        return false;
+      }
+
+      let tempers = ['J', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'];
+      let digits = cif.substr(1, cif.length - 2);
+      let temper = cif.substr(0, 1);
+      let control = cif.substr(cif.length - 1);
+      let sum = 0;
+      let i = 0;
+      let digit = 0;
+
+      if (!temper.match(/[A-Z]/)) {
+        return false;
+      }
+
+      for (i = 0; i < digits.length; ++i) {
+        digit = parseInt(digits[i]);
+
+        if (isNaN(digit)) {
+          return false;
+        }
+
+        if (i % 2 === 0) {
+          digit *= 2;
+          if (digit > 9) {
+            digit = (digit % 10) + (digit % 10);
+          }
+
+          sum += digit;
+        } else {
+          sum += digit;
+        }
+      }
+
+      sum %= 10;
+      if (sum !== 0) {
+        digit = 10 - sum;
+      } else {
+        digit = sum;
+      }
+
+      if (temper.match(/[ABEH]/)) {
+        return String(digit) === control;
+      }
+      if (temper.match(/[NPQRSW]/)) {
+        return tempers[digit] === control;
+      }
+
+      return String(digit) === control || tempers[digit] === control;
+
+    }
+    if (str != '') {
+      type = spainIdType(str);
+      console.log(type)
+      switch (type) {
+        case 'dni':
+          valid = validDNI(str);
+          break;
+        case 'nie':
+          valid = validNIE(str);
+          break;
+        case 'cif':
+          valid = validCIF(str);
+          break;
+      }
+    }
+    return { dnivalidator: valid };
   }
 
   checkError(fieldName: string, errorType: string) {
