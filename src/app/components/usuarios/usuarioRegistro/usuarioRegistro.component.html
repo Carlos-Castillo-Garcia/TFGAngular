@@ -1,10 +1,11 @@
-<div class="modal ventana" id="registro" data-backdrop="static" tabindex="1" rol="dialog" aria-labelledby="registro" aria-hidden="false">
+<div class="modal ventana" id="registro" data-backdrop="static" tabindex="1" rol="dialog" aria-labelledby="registro"
+  aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Datos del Usuario</h3>
       </div>
-      <form class="registro" [formGroup]="registroForm">
+      <form class="registro" [formGroup]="registroForm" onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
         <div class="modal-body">
           <div class="form">
             <div class="form-group campo">
@@ -43,33 +44,33 @@
               <input type="password" class="form-control" formControlName="repitePassword">
               <p class="error" *ngIf="checkErrorForm('repitePassword','passwordValidation')">
                 Las contraseñas no coinciden</p>
-            </div>           
-              <div class="form-group campo">
-                <label class="form-label">Rol del Usuario</label>
-                <select required="" type="text" formControlName="rolId">
-                  <option [value]="rol.idRol" *ngFor="let rol of arrSelectTipos">
-                    {{rol.nombreRol}} </option>
-                </select>
-                <p class="error" *ngIf="checkError('rolId','required')">
-                  Las contraseñas no coinciden</p>
-              </div>
-              <div class="form-group campo">
-                <label class="form-label">Entidad Asociada</label>
-                <select required="" type="text" formControlName="entidadId">
-                  <option [value]="cliente.idCliente" *ngFor="let cliente of arrSelectEntidades">
-                    {{cliente.nombre}} {{cliente.apellidos}} </option>
-                </select>
-                <p class="error" *ngIf="checkError('rolId','required')">
-                  Las contraseñas no coinciden</p>
-              </div>
+            </div>
+            <div class="form-group campo">
+              <label class="form-label">Rol del Usuario</label>
+              <select required="" type="text" formControlName="rolId">
+                <option [value]="rol.idRol" *ngFor="let rol of arrSelectTipos">
+                  {{rol.nombreRol}} </option>
+              </select>
+              <p class="error" *ngIf="checkError('rolId','required')">
+                Las contraseñas no coinciden</p>
+            </div>
+            <div class="form-group campo">
+              <label class="form-label">Entidad Asociada</label>
+              <select required="" type="text" formControlName="entidadId">
+                <option [value]="cliente.idCliente" *ngFor="let cliente of arrSelectEntidades">
+                  {{cliente.nombre}} {{cliente.apellidos}} </option>
+              </select>
+              <p class="error" *ngIf="checkError('rolId','required')">
+                Las contraseñas no coinciden</p>
+            </div>
 
-              <div class="form-group campo">
-                <label class="form-label">Borrado</label>
-                <input type="checkbox" class="form-control" formControlName="borrado">
-              </div>
+            <div class="form-group campo">
+              <label class="form-label">Borrado</label>
+              <input type="checkbox" class="form-control" formControlName="borrado">
             </div>
           </div>
-       
+        </div>
+
 
         <div class="modal-footer">
           <button type="button" data-dismiss="modal" data-backdrop="false">Close</button>

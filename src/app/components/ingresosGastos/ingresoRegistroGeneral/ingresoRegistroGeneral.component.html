@@ -1,9 +1,10 @@
-<div class="modal ventana" id="ingresoGeneral" data-backdrop="static" tabindex="1" rol="dialog" aria-labelledby="ingaGeneral"
-  aria-hidden="false">
+<div class="modal ventana" id="ingresoGeneral" data-backdrop="static" tabindex="1" rol="dialog"
+  aria-labelledby="ingaGeneral" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <h3>Introduccion de Datos de Ingresos</h3>
-      <form name="formulario" class="registro" [formGroup]="registroForm">
+      <form name="formulario" class="registro" [formGroup]="registroForm"
+        onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
         <div class="modal-header">>
           <div class="modal-body">
             <div class="form">
@@ -139,7 +140,7 @@
               <div class="form-group campo">
                 <label class="form-label">Total Impuesto Iva </label>
                 <input type="number" class="form-control" required="" formControlName="totalImpuestoIva">
-               
+
               </div>
               <div class="form-group campo">
                 <label class="form-label">Total Ingreso </label>

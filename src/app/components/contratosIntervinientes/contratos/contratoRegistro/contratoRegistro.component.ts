@@ -78,7 +78,6 @@ export class ContratoRegistroComponent implements OnInit {
   async enviar() {
     if (this.registroForm.value.idContratos !== null) {
       this.registroForm.value.updateTime = new Date();
-      console.log(this.registroForm.value.idContratos)
       await this.metodosGlobales.update(this.registroForm.value, environment.APIPATH_CONTRATO);
     } else {
       this.registroForm.value.createTime = new Date();

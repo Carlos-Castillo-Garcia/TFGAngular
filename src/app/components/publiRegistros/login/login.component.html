@@ -1,16 +1,16 @@
- 
-<div class="modal ventana" id="login" data-backdrop="static"tabindex="1" rol="dialog" aria-labelledby="login"
+<div class="modal ventana" id="login" data-backdrop="static" tabindex="1" rol="dialog" aria-labelledby="login"
   aria-hidden="false">
   <div class="modal-dialog">
-   
-    <div class="modal-content">     
+
+    <div class="modal-content">
       <div class="modal-header">
         <h3>Login</h3>
       </div>
-      <form class="registro" [formGroup]="registroForm" (ngSubmit)="loguearse()">
+      <form class="registro" [formGroup]="registroForm" (ngSubmit)="loguearse()"
+        onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
         <div class="modal-body">
           <div class="form">
-            
+
             <div class="form-group campo">
               <label class="form-label">Email</label>
               <input type="text" class="form-control" formControlName="email">

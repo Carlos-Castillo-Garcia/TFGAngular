@@ -1,11 +1,12 @@
-<div class="modal ventana" id="registroTiposConceptos"  data-backdrop="static"tabindex="1" rol="dialog"
+<div class="modal ventana" id="registroTiposConceptos" data-backdrop="static" tabindex="1" rol="dialog"
   aria-labelledby="registroTiposConceptos" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Datos del Tipo Concepto</h3>
       </div>
-      <form class="registro" [formGroup]="registroForm" (ngSubmit)="enviar()">
+      <form class="registro" [formGroup]="registroForm" (ngSubmit)="enviar()"
+        onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
         <div class="modal-body">
           <div class="form">
             <div class="form-group campo">

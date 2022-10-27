@@ -1,12 +1,11 @@
-<div class="modal ventana" id="inmuebleRegistro" data-backdrop="static" tabindex="1" rol="dialog" aria-labelledby="inmuebleRegistro"
-  aria-hidden="false">
+<div class="modal ventana" id="inmuebleRegistro" data-backdrop="static" tabindex="1" rol="dialog"
+  aria-labelledby="inmuebleRegistro" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Datos del Inmueble</h3>
       </div>
-      <form class="registro"
-       [formGroup]="registroForm">
+      <form class="registro" [formGroup]="registroForm" onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
 
         <div class="modal-body">
           <div class="form">
@@ -55,12 +54,12 @@
                 requerido
               </p>
               <p class="error" *ngIf="checkError('codigoPostal', 'minlength')">
-               debe tener 5 caracteres
+                debe tener 5 caracteres
               </p>
               <p class="error" *ngIf="checkError('codigoPostal', 'maxlength')">
                 debe tener 5 caracteres
               </p>
-            </div>            
+            </div>
             <div class="form-group campo">
               <label class="form-label">Nº Planta </label>
               <input type="number" class="form-control" formControlName="planta">

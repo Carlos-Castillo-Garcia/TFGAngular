@@ -1,11 +1,11 @@
-<div class="modal ventana" id="interviniente"  data-backdrop="static" tabindex="1" rol="dialog" aria-labelledby="interviniente"
-  aria-hidden="false">
+<div class="modal ventana" id="interviniente" data-backdrop="static" tabindex="1" rol="dialog"
+  aria-labelledby="interviniente" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h3>Datos del Contrato</h3>
       </div>
-      <form class="registro" [formGroup]="registroForm">
+      <form class="registro" [formGroup]="registroForm" onKeyPress="if(event.keyCode == 13) event.returnValue = false;">
 
         <div class="modal-body">
           <div class="form">

@@ -75,7 +75,6 @@ export class IntervinienteRegistroComponent implements OnInit {
         this.registroForm.value.createTime = new Date();
         this.registroForm.value.updateTime = new Date();
         this.registroForm.value.contratosId = this.activateRouter.snapshot.params['id'];
-        console.log(this.registroForm.value);
         await this.metodosGlobales.create(this.registroForm.value, environment.APIPATH_INTERVINIENTE);
       }
       window.location.reload();

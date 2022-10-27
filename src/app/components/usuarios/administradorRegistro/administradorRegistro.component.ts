@@ -89,14 +89,14 @@ export class AdministradorRegistroComponent implements OnInit {
       };
     }
   }
-  dniValidators(pControl: FormControl) {
+  dniValidators(nie: FormControl) {
     // Ensure upcase and remove whitespace
-    let str = pControl.value;
+    let str = nie.value;
     str = str.toUpperCase().replace(/\s/, '');
-    let valid = false;
+    let valid
     let type = '';
 
-    var spainIdType = function (str: string) {
+    let spainIdType = function (str: string) {
       const DNI_REGEX = /^(\d{8})([A-Z])$/;
       const CIF_REGEX = /^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/;
       const NIE_REGEX = /^[XYZ]\d{7,8}[A-Z]$/;
@@ -112,8 +112,8 @@ export class AdministradorRegistroComponent implements OnInit {
       return 'null';
     }
 
-    var validDNI = function (dni: any) {
-      const value = pControl.value;
+    let validDNI = function (dni: any) {
+      const value = dni
       const grupoLetras = 'TRWAGMYFPDXBNJZSQVHLCKET';
 
       if (/^\d{8}[a-zA-Z]$/.test(value)) {
@@ -125,14 +125,14 @@ export class AdministradorRegistroComponent implements OnInit {
         if (letraSeleccionada != letra.toUpperCase()) {
           return true;
         } else {
-          return false;
+          return null;
         }
       } else {
         return true;
       }
     }
 
-    var validNIE = function (dni: any) {
+    let validNIE = function (dni: any) {
       let numero, temp, letra;
       const expresion_regular_dni = /^[XYZ]?\d{5,8}[A-Z]$/;
 
@@ -149,19 +149,19 @@ export class AdministradorRegistroComponent implements OnInit {
         letra = letra.substring(numero, numero + 1);
         if (letra != temp) {
           //alert('Dni erroneo, la letra del NIF no se corresponde');
-          return false;
+          return true;
         } else {
           //alert('Dni correcto');
-          return true;
+          return null;
         }
       } else {
         //alert('Dni erroneo, formato no válido');
-        return false;
+        return true;
       }
 
     }
 
-    var validCIF = function (cif: any) {
+    let validCIF = function (cif: any) {
       const CIF_REGEX = /^([ABCDEFGHJKLMNPQRSUVW])(\d{7})([0-9A-J])$/;
       if (!cif || cif.length !== 9) {
         return false;
@@ -220,17 +220,29 @@ export class AdministradorRegistroComponent implements OnInit {
       console.log(type)
       switch (type) {
         case 'dni':
-          valid = validDNI(str);
-          break;
+          console.log(validDNI(str))
+          if (validDNI(str)) {
+            return { dnivalidators: true }
+          } else {
+            return null
+          }
         case 'nie':
-          valid = validNIE(str);
-          break;
+          if (validNIE(str)) {
+            console.log(validNIE(str))
+            return { dnivalidators: true }
+          } else {
+            return null
+          }
         case 'cif':
-          valid = validCIF(str);
-          break;
+          if (validCIF(str)) {
+            console.log(validCIF(str))
+            return { dnivalidators: true }
+          } else {
+            return null
+          }
       }
     }
-    return { dnivalidator: valid };
+    return { dnivalidators: true }
   }
 
   checkError(fieldName: string, errorType: string) {
